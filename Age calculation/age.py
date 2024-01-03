@@ -1,11 +1,19 @@
 from Calculation_age import get_data
 
-birthday_day = int(input('Enter your birthday day: '))
-birthday_month = int(input('Enter your birthday month: '))
-birthday_year = int(input('Enter your birthday year: '))
+try:
+    birthday_day = int(input('Enter your birthday day (1-31): '))
+    if not 1 <= birthday_day <= 31:
+        raise ValueError("Invalid day input")
 
-if 0<birthday_day<31 and 0<birthday_month<13 and 0<birthday_year:
-    year,month,day = get_data(birthday_day,birthday_month,birthday_year)
-    print(f'Your age is {day} days and {month} month and {year} years ')
-else:
-    print('Your input wrong number')
+    birthday_month = int(input('Enter your birthday month (1-12): '))
+    if not 1 <= birthday_month <= 12:
+        raise ValueError("Invalid month input")
+
+    birthday_year = int(input('Enter your birthday year: '))
+    if birthday_year < 0:
+        raise ValueError("Invalid year input")
+
+    year, month, day = get_data(birthday_day, birthday_month, birthday_year)
+    print(f'Your age is {day} days, {month} months, and {year} years.')
+except ValueError as e:
+    print(f'Error: {str(e)}')
